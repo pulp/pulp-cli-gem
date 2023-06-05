@@ -1,0 +1,8 @@
+ARG FROM_TAG="latest"
+FROM ghcr.io/pulp/pulp-ci-centos:${FROM_TAG}
+
+ARG PULP_GEM_VERSION=""
+
+RUN pip3 install --upgrade \
+  pulp_gem${PULP_GEM_VERSION} \
+  requests
