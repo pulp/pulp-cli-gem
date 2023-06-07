@@ -7,6 +7,22 @@ updates:
   open-pull-requests-limit: 10
   commit-message:
     prefix: "[noissue]"
+- package-ecosystem: pip
+  directory: "/pulp-glue-gem"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  commit-message:
+    prefix: "[noissue]"
+- package-ecosystem: pip
+  directory: "/test"
+  schedule:
+    interval: never
+  ignore:
+    - dependency-name: "*"
+  open-pull-requests-limit: 0
+  commit-message:
+    prefix: "[noissue]"
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
