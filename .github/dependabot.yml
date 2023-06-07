@@ -17,7 +17,7 @@ updates:
 - package-ecosystem: pip
   directory: "/test"
   schedule:
-    interval: never
+    interval: monthly
   ignore:
     - dependency-name: "*"
   open-pull-requests-limit: 0
