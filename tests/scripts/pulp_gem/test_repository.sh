@@ -18,14 +18,14 @@ REMOTE2_HREF="$(pulp gem remote create --name "cli_test_gem_remote2" --url "http
 expect_succ pulp gem repository list
 
 expect_succ pulp gem repository create --name "cli_test_gem_repo" --description "Test repository for CLI tests"
-if pulp debug has-plugin --name"gem" --specifier ">=0.0.1.dev"
+if pulp debug has-plugin --name "gem" --specifier ">=0.0.1.dev"
 then
   expect_succ pulp gem repository update --repository "cli_test_gem_repo" --description "" --remote "cli_test_gem_remote1"
 else
   expect_succ pulp gem repository update --repository "cli_test_gem_repo" --description ""
 fi
 expect_succ pulp gem repository show --repository "cli_test_gem_repo"
-if pulp debug has-plugin --name"gem" --specifier ">=0.0.1.dev"
+if pulp debug has-plugin --name "gem" --specifier ">=0.0.1.dev"
 then
   expect_succ test "$(echo "$OUTPUT" | jq -r '.remote')" = "$REMOTE1_HREF"
   expect_succ pulp gem repository update --repository "cli_test_gem_repo" --remote "$REMOTE2_HREF"
