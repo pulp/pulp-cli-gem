@@ -95,10 +95,15 @@ repository.add_command(
 @href_option
 @repository_lookup_option
 @remote_option
+@click.option(
+    "--mirror/--no-mirror",
+    default=None,
+)
 @pass_repository_context
 def sync(
     repository_ctx: PulpRepositoryContext,
     remote: EntityFieldDefinition,
+    mirror: t.Optional[bool],
 ) -> None:
     """
     Sync the repository from a remote source.
@@ -107,6 +112,8 @@ def sync(
     """
     body: t.Dict[str, t.Any] = {}
     repository = repository_ctx.entity
+    if mirror is not None:
+        body["mirror"] = mirror
 
     if remote:
         body["remote"] = remote
