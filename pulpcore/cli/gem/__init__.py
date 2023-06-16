@@ -4,6 +4,7 @@ import click
 from pulp_glue.common.i18n import get_translation
 from pulpcore.cli.common.generic import pulp_group
 
+from pulpcore.cli.gem.content import content
 from pulpcore.cli.gem.distribution import distribution
 from pulpcore.cli.gem.publication import publication
 from pulpcore.cli.gem.remote import remote
@@ -21,6 +22,7 @@ def gem_group() -> None:
 
 
 def mount(main: click.Group, **kwargs: Any) -> None:
+    gem_group.add_command(content)
     gem_group.add_command(distribution)
     gem_group.add_command(publication)
     gem_group.add_command(remote)

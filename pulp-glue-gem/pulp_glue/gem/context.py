@@ -9,7 +9,6 @@ from pulp_glue.common.context import (
     PulpRemoteContext,
     PulpRepositoryContext,
     PulpRepositoryVersionContext,
-    registered_repository_contexts,
 )
 
 
@@ -20,6 +19,7 @@ class PulpGemContentContext(PulpContentContext):
     ENTITIES = _("gems")
     HREF = "gem_gem_content_href"
     ID_PREFIX = "content_gem_gem"
+    CAPABILITIES = {"upload": []}
     NEEDS_PLUGINS = [PluginRequirement("gem", min="0.0.0")]
 
 
@@ -84,6 +84,3 @@ class PulpGemRepositoryContext(PulpRepositoryContext):
     ID_PREFIX = "repositories_gem_gem"
     VERSION_CONTEXT = PulpGemRepositoryVersionContext
     NEEDS_PLUGINS = [PluginRequirement("gem", min="0.0.0")]
-
-
-registered_repository_contexts["gem:gem"] = PulpGemRepositoryContext
