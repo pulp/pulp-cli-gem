@@ -1,6 +1,10 @@
 import click
 from pulp_glue.common.i18n import get_translation
-from pulp_glue.gem.context import PulpGemDistributionContext, PulpGemRepositoryContext
+from pulp_glue.gem.context import (
+    PulpGemDistributionContext,
+    PulpGemRemoteContext,
+    PulpGemRepositoryContext,
+)
 from pulpcore.cli.common.generic import (
     PulpCLIContext,
     common_distribution_create_options,
@@ -37,6 +41,15 @@ repository_option = resource_option(
     ),
 )
 
+remote_option = resource_option(
+    "--remote",
+    default_plugin="gem",
+    default_type="gem",
+    context_table={"gem:gem": PulpGemRemoteContext},
+    href_pattern=PulpGemRemoteContext.HREF_PATTERN,
+    help=_("Remote to be used for pull-through caching."),
+)
+
 
 @pulp_group()
 @click.option(
@@ -66,6 +79,7 @@ update_options = [
         ),
     ),
     repository_option,
+    remote_option,
     pulp_labels_option,
 ]
 create_options = common_distribution_create_options + update_options

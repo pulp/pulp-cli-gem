@@ -11,11 +11,13 @@ from pulp_glue.gem.context import (
 from pulpcore.cli.common.generic import (
     PulpCLIContext,
     create_command,
+    create_content_json_callback,
     destroy_command,
     href_option,
     label_command,
     label_select_option,
     list_command,
+    lookup_callback,
     name_option,
     pass_pulp_context,
     pass_repository_context,
@@ -74,6 +76,30 @@ update_options = [
     pulp_labels_option,
 ]
 create_options = update_options + [click.option("--name", required=True)]
+content_checksum_option = click.option(
+    "--checksum", callback=lookup_callback("checksum", PulpGemContentContext), expose_value=False
+)
+content_json_callback = create_content_json_callback(PulpGemContentContext)
+modify_options = [
+    click.option(
+        "--add-content",
+        callback=content_json_callback,
+        help=_(
+            """JSON string with a list of objects to add to the repository.
+    Each object should have the key: "href" or "checksum"
+    The argument prefixed with the '@' can be the path to a JSON file with a list of objects."""
+        ),
+    ),
+    click.option(
+        "--remove-content",
+        callback=content_json_callback,
+        help=_(
+            """JSON string with a list of objects to remove from the repository.
+    Each object should have the key: "href" or "checksum"
+    The argument prefixed with the '@' can be the path to a JSON file with a list of objects."""
+        ),
+    ),
+]
 
 repository.add_command(list_command(decorators=[label_select_option]))
 repository.add_command(show_command(decorators=lookup_options))
@@ -86,6 +112,9 @@ repository.add_command(label_command(decorators=nested_lookup_options))
 repository.add_command(
     repository_content_command(
         contexts={"gem": PulpGemContentContext},
+        add_decorators=[href_option, content_checksum_option],
+        remove_decorators=[href_option, content_checksum_option],
+        modify_decorators=modify_options,
     )
 )
 

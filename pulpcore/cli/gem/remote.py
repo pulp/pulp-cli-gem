@@ -10,6 +10,7 @@ from pulpcore.cli.common.generic import (
     href_option,
     label_command,
     list_command,
+    load_json_callback,
     name_option,
     pass_pulp_context,
     pulp_group,
@@ -45,6 +46,19 @@ nested_lookup_options = [remote_lookup_option]
 gem_remote_options = [
     click.option(
         "--policy", type=click.Choice(["immediate", "on_demand", "streamed"], case_sensitive=False)
+    ),
+    click.option(
+        "--includes",
+        callback=load_json_callback,
+        help=_("Gem allow list. Dictionary of form 'gem:version-specifier/null'"),
+    ),
+    click.option(
+        "--excludes",
+        callback=load_json_callback,
+        help=_("Gem block list. Dictionary of form 'gem:version-specifier/null'"),
+    ),
+    click.option(
+        "--prereleases/--no-prereleases", default=None, help=_("Include prereleases in sync")
     ),
 ]
 
