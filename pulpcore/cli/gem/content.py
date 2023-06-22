@@ -90,6 +90,11 @@ lookup_options = [
     click.option(
         "--version", callback=lookup_callback("version", PulpGemContentContext), expose_value=False
     ),
+    click.option(
+        "--checksum",
+        callback=lookup_callback("checksum", PulpGemContentContext),
+        expose_value=False,
+    ),
 ]
 create_options = [
     click.option(
@@ -107,6 +112,7 @@ content.add_command(
         decorators=[
             click.option("--name"),
             click.option("--version"),
+            click.option("--checksum"),
         ]
     )
 )

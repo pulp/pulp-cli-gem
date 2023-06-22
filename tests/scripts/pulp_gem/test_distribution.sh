@@ -38,6 +38,9 @@ expect_succ pulp gem distribution update \
   --distribution "cli_test_gem_distro" \
   --base-path "cli_test_gem_distro" \
   --publication "$PUBLICATION_HREF"
+expect_succ pulp gem distribution update \
+  --distribution "cli_test_gem_distro" \
+  --remote "cli_test_gem_remote"
 
 expect_succ curl "$curl_opt" --head --fail "$PULP_BASE_URL/pulp/content/cli_test_gem_distro/specs.4.8"
 
