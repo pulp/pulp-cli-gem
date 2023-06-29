@@ -84,3 +84,4 @@ class PulpGemRepositoryContext(PulpRepositoryContext):
     ID_PREFIX = "repositories_gem_gem"
     VERSION_CONTEXT = PulpGemRepositoryVersionContext
     NEEDS_PLUGINS = [PluginRequirement("gem", min="0.0.0")]
+    NULLABLES = PulpRepositoryContext.NULLABLES | {"remote"}
