@@ -20,7 +20,7 @@ jobs:
             image_tag: "nightly"
             pulp_api_root: "/relocated/djnd/"
           - python: "3.6"
-            image_tag: "nightly"
+            image_tag: "latest"
             lower_bounds: true
     steps:
       - uses: actions/checkout@v3
