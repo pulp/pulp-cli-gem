@@ -1,11 +1,15 @@
-name: Nightly
+name: pulp-cli Nightly
 
 on:
   schedule:
-    - cron: '15 3 * * *'
+    - cron: "15 3 * * *"
+  workflow_dispatch:
 
 jobs:
   test:
     uses: "./.github/workflows/test.yml"
   codeql:
     uses: "./.github/workflows/codeql.yml"
+  collect_changes:
+    uses: "./.github/workflows/collect_changes.yml"
+    secrets: inherit
