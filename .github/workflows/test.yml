@@ -24,6 +24,12 @@ jobs:
             lower_bounds: true
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/*requirements.txt', '**/*constraints.lock', '**/setup.py', '**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -32,7 +38,7 @@ jobs:
         run: |
           if [ "${{matrix.lower_bounds}}" ]
           then
-            pip install -r test_requirements.txt -r tests/lower_bounds_requirements.txt
+            pip install -r test_requirements.txt -c lower_bounds_constraints.lock
           else
             pip install -r test_requirements.txt
           fi
