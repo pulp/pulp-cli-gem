@@ -28,20 +28,22 @@ PUBLICATION_HREF=$(echo "$OUTPUT" | jq -r .pulp_href)
 
 expect_succ pulp gem distribution create \
   --name "cli_test_gem_distro" \
-  --base-path "wrong_path" \
+  --base-path "cli_test_gem_distro" \
   --publication "$PUBLICATION_HREF"
 HREF="$(echo "$OUTPUT" | jq -r '.pulp_href')"
+BASE_URL="$(echo "$OUTPUT" | jq -r '.base_url')"
+
+expect_succ curl "$curl_opt" --head --fail "${BASE_URL}specs.4.8"
+
 expect_succ pulp gem distribution update \
   --distribution "$HREF" \
   --publication ""
 expect_succ pulp gem distribution update \
   --distribution "cli_test_gem_distro" \
-  --base-path "cli_test_gem_distro" \
+  --base-path "wrong_path" \
   --publication "$PUBLICATION_HREF"
 expect_succ pulp gem distribution update \
   --distribution "cli_test_gem_distro" \
   --remote "cli_test_gem_remote"
-
-expect_succ curl "$curl_opt" --head --fail "$PULP_BASE_URL/pulp/content/cli_test_gem_distro/specs.4.8"
 
 expect_succ pulp gem distribution destroy --distribution "cli_test_gem_distro"
