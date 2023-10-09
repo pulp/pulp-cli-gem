@@ -23,9 +23,7 @@ expect_fail pulp gem repository sync --repository "cli_test_gem_repository"
 # Test with remote
 expect_succ pulp gem repository sync --repository "cli_test_gem_repository" --remote "cli_test_gem_remote"
 
-## Use this version only after switching to pulp-cli >= 0.20
-# if pulp debug has-plugin --name "gem" --specifier ">=0.1.0"
-if pulp debug has-plugin --name "gem" --min-version "0.1.0"
+if pulp debug has-plugin --name "gem" --specifier ">=0.1.0"
 then
   # Preconfigure remote
   expect_succ pulp gem repository update --repository "cli_test_gem_repository" --remote "cli_test_gem_remote"
@@ -38,9 +36,7 @@ expect_succ pulp gem repository version list --repository "cli_test_gem_reposito
 expect_succ test "$(echo "$OUTPUT" | jq -r length)" -eq 2
 expect_succ pulp gem repository version show --repository "cli_test_gem_repository" --version 1
 
-## Use this version only after switching to pulp-cli >= 0.20
-# if pulp debug has-plugin --name "gem" --specifier ">=0.1.1"
-if pulp debug has-plugin --name "gem" --min-version "0.1.1"
+if pulp debug has-plugin --name "gem" --specifier ">=0.1.1"
 then
   expect_succ test "$(echo "$OUTPUT" | jq -r '.content_summary.present."gem.gem".count')" -eq 4
 fi

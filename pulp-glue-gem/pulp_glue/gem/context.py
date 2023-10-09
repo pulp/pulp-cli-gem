@@ -31,6 +31,7 @@ class PulpGemDistributionContext(PulpDistributionContext):
     HREF = "gem_gem_distribution_href"
     ID_PREFIX = "distributions_gem_gem"
     NEEDS_PLUGINS = [PluginRequirement("gem")]
+    CAPABILITIES = {"roles": [PluginRequirement("gem", specifier=">=0.4.0.dev")]}
 
     def preprocess_body(self, body: EntityDefinition) -> EntityDefinition:
         body = super().preprocess_body(body)
@@ -49,6 +50,7 @@ class PulpGemPublicationContext(PulpPublicationContext):
     HREF = "gem_gem_publication_href"
     ID_PREFIX = "publications_gem_gem"
     NEEDS_PLUGINS = [PluginRequirement("gem")]
+    CAPABILITIES = {"roles": [PluginRequirement("gem", specifier=">=0.4.0.dev")]}
 
     def preprocess_entity(self, body: EntityDefinition, partial: bool = False) -> EntityDefinition:
         body = super().preprocess_entity(body, partial=partial)
@@ -67,6 +69,7 @@ class PulpGemRemoteContext(PulpRemoteContext):
     HREF = "gem_gem_remote_href"
     ID_PREFIX = "remotes_gem_gem"
     NEEDS_PLUGINS = [PluginRequirement("gem")]
+    CAPABILITIES = {"roles": [PluginRequirement("gem", specifier=">=0.4.0.dev")]}
 
 
 class PulpGemRepositoryVersionContext(PulpRepositoryVersionContext):
@@ -85,3 +88,4 @@ class PulpGemRepositoryContext(PulpRepositoryContext):
     VERSION_CONTEXT = PulpGemRepositoryVersionContext
     NEEDS_PLUGINS = [PluginRequirement("gem")]
     NULLABLES = PulpRepositoryContext.NULLABLES | {"remote"}
+    CAPABILITIES = {"roles": [PluginRequirement("gem", specifier=">=0.4.0.dev")]}
