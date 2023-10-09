@@ -16,6 +16,7 @@ from pulpcore.cli.common.generic import (
     pulp_group,
     remote_filter_options,
     remote_lookup_option,
+    role_command,
     show_command,
     update_command,
 )
@@ -70,3 +71,4 @@ remote.add_command(
 )
 remote.add_command(destroy_command(decorators=lookup_options))
 remote.add_command(label_command(decorators=nested_lookup_options))
+remote.add_command(role_command(decorators=nested_lookup_options))
