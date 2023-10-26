@@ -20,11 +20,11 @@ setup(
     name="pulp-cli-gem",
     description="Command line interface to talk to pulpcore's REST API. (Gem plugin commands)",
     url="https://github.com/pulp/pulp-cli-gem",
-    version="0.2.0.dev",
+    version="0.2.0",
     packages=plugin_packages,
     package_data={package: ["py.typed"] for package in plugin_packages},
     python_requires=">=3.6",
-    install_requires=["pulp-cli>=0.20.0", "pulp-glue-gem==0.2.0.dev"],
+    install_requires=["pulp-cli>=0.20.0", "pulp-glue-gem==0.2.0"],
     entry_points={
         "pulp_cli.plugins": [f"{name}={module}" for name, module in plugin_entry_points],
     },

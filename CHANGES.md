@@ -10,7 +10,17 @@
 
 [//]: # (towncrier release notes start)
 
-## 0.1.0 (2023-07-03)
+## 0.2.0 (2023-10-26)
+=====================
+
+
+### Features
+
+- Added support for managing roles (RBAC) on gem related objects.
+  [#31](https://github.com/pulp/pulp-cli-gem/issues/31)
+
+
+---## 0.1.0 (2023-07-03)
 =====================
 
 
