@@ -30,7 +30,7 @@ setup(
     packages=plugin_packages,
     package_data={"": ["py.typed"]},
     python_requires=">=3.6",
-    install_requires=["pulp-glue>=0.20.0"],
+    install_requires=["pulp-glue>=0.20.0,<0.23.0.dev"],
     license="GPLv2+",
     classifiers=[
         "Development Status :: 4 - Beta",

@@ -24,7 +24,7 @@ setup(
     packages=plugin_packages,
     package_data={package: ["py.typed"] for package in plugin_packages},
     python_requires=">=3.6",
-    install_requires=["pulp-cli>=0.20.0", "pulp-glue-gem==0.2.1.dev"],
+    install_requires=["pulp-cli>=0.20.0,<0.23.0.dev", "pulp-glue-gem==0.2.1.dev"],
     entry_points={
         "pulp_cli.plugins": [f"{name}={module}" for name, module in plugin_entry_points],
     },
