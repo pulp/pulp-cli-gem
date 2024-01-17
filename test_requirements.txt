@@ -1,6 +1,3 @@
-.
-./pulp-glue-gem
-
 # Test requirements
 pygments
 pytest

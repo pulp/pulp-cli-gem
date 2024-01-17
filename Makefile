@@ -1,8 +1,15 @@
-PLUGINS=$(notdir $(wildcard pulpcore/cli/*))
+GLUE_PLUGINS=$(notdir $(wildcard pulp-glue/pulp_glue/*))
+CLI_PLUGINS=$(notdir $(wildcard pulpcore/cli/*))
 
 info:
+	@echo Pulp glue
+	@echo plugins: $(GLUE_PLUGINS)
 	@echo Pulp CLI
-	@echo plugins: $(PLUGINS)
+	@echo plugins: $(CLI_PLUGINS)
+
+build:
+	cd pulp-glue-gem; pyproject-build -n
+	pyproject-build -n
 
 black:
 	isort .
@@ -16,7 +23,7 @@ lint:
 	black --diff --check .
 	flake8
 	.ci/scripts/check_click_for_mypy.py
-	mypy
+	MYPYPATH=pulp-glue-gem mypy
 	cd pulp-glue-gem; mypy
 	@echo "🙊 Code 🙈 LGTM 🙉 !"
 
@@ -30,4 +37,4 @@ test: | tests/cli.toml
 site:
 	mkdocs build
 
-.PHONY: info black lint test
+.PHONY: build info black lint test
