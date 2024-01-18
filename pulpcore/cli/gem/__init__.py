@@ -10,7 +10,7 @@ from pulpcore.cli.gem.publication import publication
 from pulpcore.cli.gem.remote import remote
 from pulpcore.cli.gem.repository import repository
 
-translation = get_translation(__name__)
+translation = get_translation(__package__)
 _ = translation.gettext
 
 __version__ = "0.3.0.dev"

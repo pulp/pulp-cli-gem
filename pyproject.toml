@@ -23,7 +23,7 @@ classifiers=[
   "Typing :: Typed",
 ]
 dependencies = [
-  "pulp-cli>=0.20.0,<0.23.0.dev", 
+  "pulp-cli>=0.23.1,<0.24.0.dev",
   "pulp-glue-gem==0.3.0.dev",
 ]
 
@@ -40,7 +40,7 @@ include = ["pulpcore.cli.*"]
 namespaces = true
 
 [tool.setuptools.package-data]
-"*" = ["py.typed, locale/*/LC_MESSAGES/*.mo"]
+"*" = ["py.typed", "locale/*/LC_MESSAGES/*.mo"]
 
 [tool.towncrier]
 filename = "CHANGES.md"
