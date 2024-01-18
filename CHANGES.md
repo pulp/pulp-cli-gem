@@ -10,6 +10,36 @@
 
 [//]: # (towncrier release notes start)
 
+## 0.3.0 (2024-01-18)
+
+
+
+#### Features
+
+- Switched to using setuptools with pyproject.toml for package build.
+- Updated `pulp-cli` dependency to use version 0.23.
+
+
+### Pulp-gem GLUE
+
+
+#### Features
+
+- Updated `pulp-glue` dependency to use version 0.23.
+
+
+---
+
+## 0.2.1 (2024-01-17)
+=====================
+
+
+No significant changes.
+
+
+---
+
+
 ## 0.2.0 (2023-10-26)
 =====================
 
