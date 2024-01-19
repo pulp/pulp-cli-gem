@@ -1,4 +1,5 @@
-GLUE_PLUGINS=$(notdir $(wildcard pulp-glue/pulp_glue/*))
+
+GLUE_PLUGINS=$(notdir $(wildcard pulp-glue-gem/pulp_glue/*))
 CLI_PLUGINS=$(notdir $(wildcard pulpcore/cli/*))
 
 info:
@@ -17,7 +18,7 @@ black:
 	black .
 
 lint:
-	find . -name '*.sh' -print0 | xargs -0 shellcheck -x
+	find tests .ci -name '*.sh' -print0 | xargs -0 shellcheck -x
 	isort -c --diff .
 	cd pulp-glue-gem; isort -c --diff .
 	black --diff --check .
@@ -33,8 +34,4 @@ tests/cli.toml:
 
 test: | tests/cli.toml
 	pytest -v tests
-
-site:
-	mkdocs build
-
 .PHONY: build info black lint test
