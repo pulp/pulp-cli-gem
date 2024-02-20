@@ -7,7 +7,7 @@ name = "pulp-cli-gem"
 version = "0.4.0.dev"
 description = "Command line interface to talk to pulpcore's REST API. (Gem plugin commands)"
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.8"
 license = {text = "GPLv2+"}
 authors = [
   {name = "Pulp Team", email = "pulp-list@redhat.com"},
@@ -23,7 +23,7 @@ classifiers=[
   "Typing :: Typed",
 ]
 dependencies = [
-  "pulp-cli>=0.23.1,<0.24.0.dev",
+  "pulp-cli>=0.23.1,<0.25",
   "pulp-glue-gem==0.4.0.dev",
 ]
 
@@ -44,13 +44,14 @@ namespaces = true
 
 [tool.pulp_cli_template]
 app_label = "gem"
+glue = true
 docs = false
 translations = false
 test_matrix = """
 - python: "3.11"
   image_tag: "nightly"
   pulp_api_root: "/relocated/djnd/"
-- python: "3.6"
+- python: "3.8"
   image_tag: "latest"
   lower_bounds: true
 """
@@ -113,7 +114,6 @@ line-length = 100
 [tool.isort]
 profile = "black"
 line_length = 100
-skip = ["pulp-glue-gem"]
 
 [tool.pytest.ini_options]
 markers = [

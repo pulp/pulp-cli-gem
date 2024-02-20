@@ -19,7 +19,7 @@ jobs:
           - python: "3.11"
             image_tag: "nightly"
             pulp_api_root: "/relocated/djnd/"
-          - python: "3.6"
+          - python: "3.8"
             image_tag: "latest"
             lower_bounds: true
     steps:
