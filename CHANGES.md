@@ -10,6 +10,25 @@
 
 [//]: # (towncrier release notes start)
 
+## 0.4.0 (2024-03-18)
+
+
+
+#### Deprecations and Removals
+
+- Drop support for python <3.8.
+
+
+### Pulp-gem GLUE
+
+
+#### Deprecations and Removals
+
+- Drop support for python <3.8.
+
+
+---
+
 ## 0.3.0 (2024-01-18)
 
 
