@@ -47,14 +47,6 @@ app_label = "gem"
 glue = true
 docs = false
 translations = false
-test_matrix = """
-- python: "3.11"
-  image_tag: "nightly"
-  pulp_api_root: "/relocated/djnd/"
-- python: "3.8"
-  image_tag: "latest"
-  lower_bounds: true
-"""
 
 [tool.towncrier]
 filename = "CHANGES.md"

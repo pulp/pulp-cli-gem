@@ -16,12 +16,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - python: "3.11"
-            image_tag: "nightly"
+          - image_tag: "nightly"
             pulp_api_root: "/relocated/djnd/"
-          - python: "3.8"
-            image_tag: "latest"
+            python: "3.11"
+          - image_tag: "latest"
             lower_bounds: true
+            python: "3.8"
     steps:
       - uses: "actions/checkout@v4"
       - uses: "actions/cache@v4"
