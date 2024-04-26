@@ -33,7 +33,7 @@ expect_succ pulp gem distribution create \
 HREF="$(echo "$OUTPUT" | jq -r '.pulp_href')"
 BASE_URL="$(echo "$OUTPUT" | jq -r '.base_url')"
 
-expect_succ curl "$curl_opt" --head --fail "${BASE_URL}specs.4.8"
+expect_succ curl $curl_opt --head --fail "${BASE_URL}specs.4.8"
 
 expect_succ pulp gem distribution update \
   --distribution "$HREF" \
@@ -41,7 +41,7 @@ expect_succ pulp gem distribution update \
 expect_succ pulp gem distribution update \
   --distribution "cli_test_gem_distro" \
   --base-path "wrong_path" \
-  --publication "$PUBLICATION_HREF"
+  --repository "cli_test_gem_repository"
 expect_succ pulp gem distribution update \
   --distribution "cli_test_gem_distro" \
   --remote "cli_test_gem_remote"

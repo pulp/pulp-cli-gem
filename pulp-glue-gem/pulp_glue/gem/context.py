@@ -33,8 +33,8 @@ class PulpGemDistributionContext(PulpDistributionContext):
     NEEDS_PLUGINS = [PluginRequirement("gem")]
     CAPABILITIES = {"roles": [PluginRequirement("gem", specifier=">=0.4.0.dev")]}
 
-    def preprocess_body(self, body: EntityDefinition) -> EntityDefinition:
-        body = super().preprocess_body(body)
+    def preprocess_entity(self, body: EntityDefinition, partial: bool = False) -> EntityDefinition:
+        body = super().preprocess_entity(body)
         version = body.pop("version", None)
         if version is not None:
             repository_href = body.pop("repository")
