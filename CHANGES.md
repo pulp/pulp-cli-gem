@@ -10,6 +10,30 @@
 
 [//]: # (towncrier release notes start)
 
+## 0.5.0 (2024-04-26)
+
+
+
+#### Features {: #0.5.0-feature }
+
+- Bumped version for pulp-cli to allow 0.25.
+
+
+### Pulp-gem GLUE {: #0.5.0-pulp-gem-glue }
+
+
+#### Features {: #0.5.0-pulp-gem-glue-feature }
+
+- Bumped version for pulp-glue to allow 0.25.
+
+
+#### Deprecations and Removals {: #0.5.0-pulp-gem-glue-removal }
+
+- Drop support for python <3.8.
+
+
+---
+
 ## 0.4.0 (2024-03-18)
 
 
