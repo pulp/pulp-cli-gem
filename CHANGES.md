@@ -10,7 +10,7 @@
 
 [//]: # (towncrier release notes start)
 
-## 0.5.0 (2024-04-26)
+## 0.5.0 (2024-04-26) {: #0.5.0 }
 
 
 
@@ -34,47 +34,46 @@
 
 ---
 
-## 0.4.0 (2024-03-18)
+## 0.4.0 (2024-03-18) {: #0.4.0 }
 
 
 
-#### Deprecations and Removals
+#### Deprecations and Removals {: #0.4.0-removal }
 
 - Drop support for python <3.8.
 
 
-### Pulp-gem GLUE
+### Pulp-gem GLUE {: #0.4.0-pulp-gem-glue }
 
 
-#### Deprecations and Removals
+#### Deprecations and Removals {: #0.4.0-pulp-gem-glue-removal }
 
 - Drop support for python <3.8.
 
 
 ---
 
-## 0.3.0 (2024-01-18)
+## 0.3.0 (2024-01-18) {: #0.3.0 }
 
 
 
-#### Features
+#### Features {: #0.3.0-feature }
 
 - Switched to using setuptools with pyproject.toml for package build.
 - Updated `pulp-cli` dependency to use version 0.23.
 
 
-### Pulp-gem GLUE
+### Pulp-gem GLUE {: #0.3.0-pulp-gem-glue }
 
 
-#### Features
+#### Features {: #0.3.0-pulp-gem-glue-feature }
 
 - Updated `pulp-glue` dependency to use version 0.23.
 
 
 ---
 
-## 0.2.1 (2024-01-17)
-=====================
+## 0.2.1 (2024-01-17) {: #0.2.1 }
 
 
 No significant changes.
@@ -83,11 +82,10 @@ No significant changes.
 ---
 
 
-## 0.2.0 (2023-10-26)
-=====================
+## 0.2.0 (2023-10-26) {: #0.2.0 }
 
 
-### Features
+### Features {: #0.2.0-feature }
 
 - Added support for managing roles (RBAC) on gem related objects.
   [#31](https://github.com/pulp/pulp-cli-gem/issues/31)
@@ -96,8 +94,7 @@ No significant changes.
 ---
 
 
-## 0.1.0 (2023-07-03)
-=====================
+## 0.1.0 (2023-07-03) {: #0.1.0 }
 
 
 Initial Release.
