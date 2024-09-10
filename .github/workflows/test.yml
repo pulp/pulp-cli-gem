@@ -1,3 +1,4 @@
+---
 name: "Test"
 
 on:
@@ -21,6 +22,7 @@ jobs:
             python: "3.11"
           - image_tag: "latest"
             lower_bounds: true
+            pulp_https: true
             python: "3.8"
     steps:
       - uses: "actions/checkout@v4"
@@ -47,12 +49,14 @@ jobs:
           else
             pip install dist/pulp_cli_gem-*.whl pulp-glue-gem/dist/pulp_glue_gem-*.whl -r test_requirements.txt
           fi
-      - name: Run tests
+      - name: "Run tests"
         env:
-          CONTAINER_RUNTIME: ${{ matrix.container_runtime }}
-          IMAGE_TAG: ${{ matrix.image_tag }}
-          FROM_TAG: ${{ matrix.from_tag }}
-          CONTAINER_FILE: ${{ matrix.container_file }}
-          PULP_HTTPS: ${{ matrix.pulp_https }}
-          PULP_API_ROOT: ${{ matrix.pulp_api_root }}
-        run: .ci/run_container.sh make test
+          CONTAINER_RUNTIME: "${{ matrix.container_runtime }}"
+          IMAGE_TAG: "${{ matrix.image_tag }}"
+          FROM_TAG: "${{ matrix.from_tag }}"
+          CONTAINER_FILE: "${{ matrix.container_file }}"
+          PULP_HTTPS: "${{ matrix.pulp_https }}"
+          PULP_API_ROOT: "${{ matrix.pulp_api_root }}"
+        run: |
+          .ci/run_container.sh make test
+...
