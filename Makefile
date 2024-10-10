@@ -12,7 +12,9 @@ build:
 	cd pulp-glue-gem; pyproject-build -n
 	pyproject-build -n
 
-black:
+black: format
+
+format:
 	isort .
 	cd pulp-glue-gem; isort .
 	black .
@@ -34,4 +36,13 @@ tests/cli.toml:
 
 test: | tests/cli.toml
 	python3 -m pytest -v tests pulp-glue-gem/tests
+
+livetest: | tests/cli.toml
+	python3 -m pytest -v tests pulp-glue-gem/tests -m live
+
+unittest:
+	python3 -m pytest -v tests pulp-glue-gem/tests -m "not live"
+
+unittest_glue:
+	python3 -m pytest -v pulp-glue-gem/tests -m "not live"
 .PHONY: build info black lint test
