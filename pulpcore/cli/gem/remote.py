@@ -35,7 +35,7 @@ _ = translation.gettext
 )
 @pass_pulp_context
 @click.pass_context
-def remote(ctx: click.Context, pulp_ctx: PulpCLIContext, remote_type: str) -> None:
+def remote(ctx: click.Context, pulp_ctx: PulpCLIContext, /, remote_type: str) -> None:
     if remote_type == "gem":
         ctx.obj = PulpGemRemoteContext(pulp_ctx)
     else:
