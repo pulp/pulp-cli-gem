@@ -1,3 +1,4 @@
+---
 name: "Collect changes"
 on:
   workflow_call:
@@ -23,10 +24,11 @@ jobs:
           pip install GitPython packaging
           python3 .ci/scripts/collect_changes.py
       - name: "Create Pull Request"
-        uses: "peter-evans/create-pull-request@v6"
+        uses: "peter-evans/create-pull-request@v7"
         with:
           token: "${{ secrets.RELEASE_TOKEN }}"
           title: "Update Changelog"
           body: ""
           branch: "update_changes"
           delete-branch: true
+...
