@@ -8,6 +8,8 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - uses: "actions/checkout@v4"
+        with:
+          token: "${{ secrets.RELEASE_TOKEN }}"
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
         with:
@@ -23,10 +25,24 @@ jobs:
         run: |
           .ci/scripts/create_release_branch.sh
       - name: "Create Pull Request"
-        uses: "peter-evans/create-pull-request@v6"
+        uses: "peter-evans/create-pull-request@v7"
         with:
           token: "${{ secrets.RELEASE_TOKEN }}"
           title: "Bump dev-version"
           body: ""
           branch: "bump_version"
           delete-branch: true
+      - name: "Add Backport Label for new Branch"
+        uses: "actions/github-script@v7"
+        with:
+          script: |
+            const { NEW_BRANCH } = process.env;
+            const labelName = "backport-" + NEW_BRANCH;
+
+            await github.rest.issues.createLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: labelName,
+              color: "C8780A",
+            });
+...

@@ -12,7 +12,9 @@ build:
 	cd pulp-glue-gem; pyproject-build -n
 	pyproject-build -n
 
-black:
+black: format
+
+format:
 	isort .
 	cd pulp-glue-gem; isort .
 	black .
@@ -23,6 +25,7 @@ lint:
 	cd pulp-glue-gem; isort -c --diff .
 	black --diff --check .
 	flake8
+	.ci/scripts/check_cli_dependencies.py
 	.ci/scripts/check_click_for_mypy.py
 	MYPYPATH=pulp-glue-gem mypy
 	cd pulp-glue-gem; mypy
@@ -33,5 +36,14 @@ tests/cli.toml:
 	@echo "In order to configure the tests to talk to your test server, you might need to edit $@ ."
 
 test: | tests/cli.toml
-	pytest -v tests
+	python3 -m pytest -v tests pulp-glue-gem/tests
+
+livetest: | tests/cli.toml
+	python3 -m pytest -v tests pulp-glue-gem/tests -m live
+
+unittest:
+	python3 -m pytest -v tests pulp-glue-gem/tests -m "not live"
+
+unittest_glue:
+	python3 -m pytest -v pulp-glue-gem/tests -m "not live"
 .PHONY: build info black lint test

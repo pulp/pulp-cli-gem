@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  single_commit:
+  apply_labels:
     runs-on: "ubuntu-latest"
     name: "Label PR"
     permissions:
@@ -57,3 +57,4 @@ jobs:
                 labels: ADD_LABELS.split(","),
               });
             }
+...
