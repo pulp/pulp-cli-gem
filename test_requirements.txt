@@ -1,5 +1,5 @@
 # Test requirements
 pytest>=7.0.0,<=8.4.0
-pytest-subtests>=0.12.0,<=0.14.1
+pytest-subtests>=0.12.0,<=0.14.2
 python-gnupg==0.5.4
 trustme>=1.1.0,<1.3
