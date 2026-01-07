@@ -12,7 +12,7 @@ env:
 
 jobs:
   test:
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-24.04"
     strategy:
       fail-fast: false
       matrix:
@@ -24,7 +24,7 @@ jobs:
             lower_bounds: true
             python: "3.8"
     steps:
-      - uses: "actions/checkout@v4"
+      - uses: "actions/checkout@v5"
       - uses: "actions/cache@v4"
         with:
           path: "~/.cache/pip"
@@ -33,11 +33,11 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: "Download wheels"
-        uses: "actions/download-artifact@v4"
+        uses: "actions/download-artifact@v5"
         with:
           name: "pulp_cli_packages"
       - name: "Set up Python"
-        uses: "actions/setup-python@v5"
+        uses: "actions/setup-python@v6"
         with:
           python-version: "${{ matrix.python }}"
           allow-prereleases: true
@@ -62,6 +62,8 @@ jobs:
           PULP_HTTPS: "${{ matrix.pulp_https }}"
           PULP_OAUTH2: "${{ matrix.pulp_oauth2 }}"
           PULP_API_ROOT: "${{ matrix.pulp_api_root }}"
+          PULP_DOMAIN_ENABLED: "${{ matrix.pulp_domain_enabled }}"
+          PULP_ENABLED_PLUGINS: "${{ matrix.pulp_enabled_plugins }}"
           OAS_VERSION: "${{ matrix.oas_version }}"
         run: |
           .ci/run_container.sh make test
