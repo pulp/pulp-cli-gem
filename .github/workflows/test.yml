@@ -19,8 +19,8 @@ jobs:
         include:
           - image_tag: "nightly"
             pulp_api_root: "/relocated/djnd/"
-            upper_bounds: true
             python: "3.11"
+            upper_bounds: true
           - image_tag: "latest"
             lower_bounds: true
             pulp_https: true
