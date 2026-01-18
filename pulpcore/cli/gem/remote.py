@@ -1,6 +1,4 @@
 import click
-from pulp_glue.common.i18n import get_translation
-from pulp_glue.gem.context import PulpGemRemoteContext
 from pulpcore.cli.common.generic import (
     PulpCLIContext,
     common_remote_create_options,
@@ -20,6 +18,9 @@ from pulpcore.cli.common.generic import (
     show_command,
     update_command,
 )
+
+from pulp_glue.common.i18n import get_translation
+from pulp_glue.gem.context import PulpGemRemoteContext
 
 translation = get_translation(__package__)
 _ = translation.gettext

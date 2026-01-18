@@ -1,10 +1,6 @@
 import typing as t
 
 import click
-from pulp_glue.common.context import PulpEntityContext, PulpRepositoryContext
-from pulp_glue.common.i18n import get_translation
-from pulp_glue.core.context import PulpArtifactContext
-from pulp_glue.gem.context import PulpGemContentContext, PulpGemRepositoryContext
 from pulpcore.cli.common.generic import (
     PulpCLIContext,
     chunk_size_option,
@@ -18,6 +14,11 @@ from pulpcore.cli.common.generic import (
     resource_option,
     show_command,
 )
+
+from pulp_glue.common.context import PulpEntityContext, PulpRepositoryContext
+from pulp_glue.common.i18n import get_translation
+from pulp_glue.core.context import PulpArtifactContext
+from pulp_glue.gem.context import PulpGemContentContext, PulpGemRepositoryContext
 
 translation = get_translation(__package__)
 _ = translation.gettext
