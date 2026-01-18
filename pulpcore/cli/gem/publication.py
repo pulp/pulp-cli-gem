@@ -1,6 +1,4 @@
 import click
-from pulp_glue.common.i18n import get_translation
-from pulp_glue.gem.context import PulpGemPublicationContext, PulpGemRepositoryContext
 from pulpcore.cli.common.generic import (
     PulpCLIContext,
     create_command,
@@ -14,6 +12,9 @@ from pulpcore.cli.common.generic import (
     role_command,
     show_command,
 )
+
+from pulp_glue.common.i18n import get_translation
+from pulp_glue.gem.context import PulpGemPublicationContext, PulpGemRepositoryContext
 
 translation = get_translation(__package__)
 _ = translation.gettext
