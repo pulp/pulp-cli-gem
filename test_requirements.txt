@@ -1,4 +1,0 @@
-# Test requirements
-pytest>=7.0.0,<=9.1.0
-python-gnupg==0.5.5
-trustme>=1.1.0,<1.3
