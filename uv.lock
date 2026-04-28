@@ -878,7 +878,7 @@ wheels = [
 
 [[package]]
 name = "pulp-cli-gem"
-version = "0.6.0.dev0"
+version = "0.7.0.dev0"
 source = { editable = "." }
 dependencies = [
     { name = "pulp-cli" },
@@ -1003,7 +1003,7 @@ wheels = [
 
 [[package]]
 name = "pulp-glue-gem"
-version = "0.6.0.dev0"
+version = "0.7.0.dev0"
 source = { editable = "pulp-glue-gem" }
 dependencies = [
     { name = "pulp-glue" },
