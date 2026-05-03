@@ -141,6 +141,7 @@ ignore_missing_imports = true
 # This section is managed by the cookiecutter templates.
 current_version = "0.7.0.dev"
 commit = false
+pre_commit_hooks = ["uv lock", "git add uv.lock"]
 tag = false
 parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(\\.(?P<release>[a-z]+))?"
 serialize = [
@@ -201,7 +202,6 @@ sections = { second-party = ["pulp_glue"] }
 section-order = ["future", "standard-library", "third-party", "second-party", "first-party", "local-folder"]
 
 
-
 [tool.uv.sources]
 # This section is managed by the cookiecutter templates.
 pulp-glue-gem = { workspace = true }
@@ -215,7 +215,6 @@ members = ["pulp-glue-gem"]
 module-name = ["pulpcore.cli"]
 namespace = true
 source-exclude = ["*.pot", "*.po", "**/*\\~"]
-
 
 [dependency-groups]
 # This section is managed by the cookiecutter templates.
