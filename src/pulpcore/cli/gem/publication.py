@@ -1,5 +1,5 @@
 import click
-from pulpcore.cli.common.generic import (
+from pulp_cli.generic import (
     PulpCLIContext,
     create_command,
     destroy_command,

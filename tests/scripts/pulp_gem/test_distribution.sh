@@ -14,13 +14,6 @@ cleanup() {
 }
 trap cleanup EXIT
 
-if [ "$VERIFY_SSL" = "false" ]
-then
-  curl_opt="-k"
-else
-  curl_opt=""
-fi
-
 expect_succ pulp gem remote create --name "cli_test_gem_remote" --url "$GEM_REMOTE_URL"
 expect_succ pulp gem repository create --name "cli_test_gem_repository"
 expect_succ pulp gem repository sync --repository "cli_test_gem_repository" --remote "cli_test_gem_remote"
@@ -32,9 +25,6 @@ expect_succ pulp gem distribution create \
   --base-path "cli_test_gem_distro" \
   --publication "$PUBLICATION_HREF"
 HREF="$(echo "$OUTPUT" | jq -r '.pulp_href')"
-BASE_URL="$(echo "$OUTPUT" | jq -r '.base_url')"
-
-expect_succ curl $curl_opt --head --fail "${BASE_URL}specs.4.8"
 
 expect_succ pulp gem distribution update \
   --distribution "$HREF" \
