@@ -136,14 +136,14 @@ def sync(
     repository_ctx: PulpRepositoryContext,
     /,
     remote: EntityFieldDefinition,
-    mirror: t.Optional[bool],
+    mirror: bool | None,
 ) -> None:
     """
     Sync the repository from a remote source.
     If remote is not specified sync will try to use the default remote associated with
     the repository
     """
-    body: t.Dict[str, t.Any] = {}
+    body: dict[str, t.Any] = {}
     repository = repository_ctx.entity
     if mirror is not None:
         body["mirror"] = mirror
