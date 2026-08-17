@@ -7,17 +7,17 @@ set -eu
 pulp debug has-plugin --name "gem" || exit 23
 
 cleanup() {
-  pulp gem repository destroy --name "cli_test_gem_repository" || true
-  pulp gem remote destroy --name "cli_test_gem_remote" || true
+  pulp gem repository destroy --name "cli_test_gem_dist_repository" || true
+  pulp gem remote destroy --name "cli_test_gem_dist_remote" || true
   pulp gem distribution destroy --name "cli_test_gem_distro" || true
   pulp orphan cleanup || true
 }
 trap cleanup EXIT
 
-expect_succ pulp gem remote create --name "cli_test_gem_remote" --url "$GEM_REMOTE_URL"
-expect_succ pulp gem repository create --name "cli_test_gem_repository"
-expect_succ pulp gem repository sync --repository "cli_test_gem_repository" --remote "cli_test_gem_remote"
-expect_succ pulp gem publication create --repository "cli_test_gem_repository"
+expect_succ pulp gem remote create --name "cli_test_gem_dist_remote" --url "$GEM_REMOTE_URL"
+expect_succ pulp gem repository create --name "cli_test_gem_dist_repository"
+expect_succ pulp gem repository sync --repository "cli_test_gem_dist_repository" --remote "cli_test_gem_dist_remote"
+expect_succ pulp gem publication create --repository "cli_test_gem_dist_repository"
 PUBLICATION_HREF=$(echo "$OUTPUT" | jq -r .pulp_href)
 
 expect_succ pulp gem distribution create \
@@ -32,9 +32,9 @@ expect_succ pulp gem distribution update \
 expect_succ pulp gem distribution update \
   --distribution "cli_test_gem_distro" \
   --base-path "wrong_path" \
-  --repository "cli_test_gem_repository"
+  --repository "cli_test_gem_dist_repository"
 expect_succ pulp gem distribution update \
   --distribution "cli_test_gem_distro" \
-  --remote "cli_test_gem_remote"
+  --remote "cli_test_gem_dist_remote"
 
 expect_succ pulp gem distribution destroy --distribution "cli_test_gem_distro"

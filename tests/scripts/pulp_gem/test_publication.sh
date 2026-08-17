@@ -7,19 +7,19 @@ set -eu
 pulp debug has-plugin --name "gem" || exit 23
 
 cleanup() {
-  pulp gem repository destroy --name "cli_test_gem_repository" || true
-  pulp gem remote destroy --name "cli_test_gem_remote" || true
+  pulp gem repository destroy --name "cli_test_gem_pub_repository" || true
+  pulp gem remote destroy --name "cli_test_gem_pub_remote" || true
   pulp orphan cleanup || true
 }
 trap cleanup EXIT
 
-pulp gem remote create --name "cli_test_gem_remote" --url "$GEM_REMOTE_URL"
-pulp gem repository create --name "cli_test_gem_repository"
-pulp gem repository sync --repository "cli_test_gem_repository" --remote "cli_test_gem_remote"
+pulp gem remote create --name "cli_test_gem_pub_remote" --url "$GEM_REMOTE_URL"
+pulp gem repository create --name "cli_test_gem_pub_repository"
+pulp gem repository sync --repository "cli_test_gem_pub_repository" --remote "cli_test_gem_pub_remote"
 
-expect_succ pulp gem publication create --repository "cli_test_gem_repository"
+expect_succ pulp gem publication create --repository "cli_test_gem_pub_repository"
 PUBLICATION_HREF="$(echo "$OUTPUT" | jq -r .pulp_href)"
 expect_succ pulp gem publication destroy --href "$PUBLICATION_HREF"
-expect_succ pulp gem publication create --repository "cli_test_gem_repository" --version 0
+expect_succ pulp gem publication create --repository "cli_test_gem_pub_repository" --version 0
 PUBLICATION_HREF="$(echo "$OUTPUT" | jq -r .pulp_href)"
 expect_succ pulp gem publication destroy --href "$PUBLICATION_HREF"
