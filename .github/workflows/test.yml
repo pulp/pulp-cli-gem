@@ -4,10 +4,6 @@ name: "Test"
 on:
   workflow_call:
 
-defaults:
-  run:
-    working-directory: "pulp-cli-gem"
-
 env:
   COLORTERM: "yes"
   TERM: "xterm-256color"
@@ -32,8 +28,6 @@ jobs:
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v6"
-        with:
-          path: "pulp-cli-gem"
       - name: "Download wheels"
         uses: "actions/download-artifact@v8"
         with:
@@ -70,5 +64,5 @@ jobs:
             RESOLUTION=()
           fi
 
-          uv run "${RESOLUTION[@]}" --isolated --with ../dist/pulp_glue*.whl --with ../dist/pulp_cli*.whl --only-group test .ci/run_container.sh make _test
+          uv run "${RESOLUTION[@]}" --isolated --with dist/pulp_glue*.whl --with dist/pulp_cli*.whl --only-group test .ci/run_container.sh make _test
 ...

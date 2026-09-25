@@ -4,21 +4,14 @@ name: "pulp-cli Release"
 on:
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: "pulp-cli-gem"
-
 jobs:
   release:
     name: "Release"
-    permissions:
-      contents: "write"
     runs-on: "ubuntu-latest"
     steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v6"
+      - uses: "actions/checkout@v6"
         with:
-          path: "pulp-cli-gem"
+          token: "${{ secrets.RELEASE_TOKEN }}"
       - name: "Set up Python"
         uses: "actions/setup-python@v6"
         with:

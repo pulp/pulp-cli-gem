@@ -7,10 +7,6 @@ on:
       - "main"
   workflow_call:
 
-defaults:
-  run:
-    working-directory: "pulp-cli-gem"
-
 jobs:
   analyze:
     name: "Analyze"
@@ -23,8 +19,6 @@ jobs:
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v6"
-        with:
-          path: "pulp-cli-gem"
       - name: "Initialize CodeQL"
         uses: "github/codeql-action/init@v4"
         with:
