@@ -1,5 +1,5 @@
 ---
-name: "Pulp CLI PR static checks"
+name: "PR static checks"
 on:
   pull_request_target:
     types: ["opened", "synchronize", "reopened"]
@@ -18,6 +18,8 @@ defaults:
 
 jobs:
   apply_labels:
+    permissions:
+      pull-requests: "write"
     runs-on: "ubuntu-latest"
     name: "Label PR"
     steps:
@@ -41,8 +43,6 @@ jobs:
           uv run -q .ci/scripts/pr_labels.py "origin/${{ github.base_ref }}" "${{ github.event.pull_request.head.sha }}" >> "$GITHUB_ENV"
       - name: "Apply PR Labels"
         uses: "actions/github-script@v8"
-        permissions:
-          pull-requests: "write"
         with:
           script: |
             const { ADD_LABELS, REMOVE_LABELS } = process.env;
