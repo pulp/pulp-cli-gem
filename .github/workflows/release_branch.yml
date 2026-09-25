@@ -9,6 +9,10 @@ defaults:
 
 jobs:
   create-release-branch:
+    permissions:
+      contents: "write"
+      issues: "write"
+      pull-requests: "write"
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout"
@@ -29,16 +33,11 @@ jobs:
           git config user.name pulpbot
           git config user.email pulp-infra@redhat.com
       - name: "Create Release Branch"
-        permissions:
-          contents: "write"
         run: |
           uv run --with bump-my-version~=0.20.0 .ci/scripts/create_release_branch.sh
       - name: "Create Pull Request"
         uses: "peter-evans/create-pull-request@v8"
         id: "create_pr"
-        permissions:
-          contents: "write"
-          pull-requests: "write"
         with:
           title: "Bump dev-version"
           body: ""
@@ -46,9 +45,6 @@ jobs:
           delete-branch: true
           path: "pulp-cli-gem"
       - name: "Mark PR automerge"
-        permissions:
-          contents: "write"
-          pull-requests: "write"
         run: |
           gh pr merge --rebase --auto "${{ steps.create_pr.outputs.pull-request-number }}"
         if: "steps.create_pr.outputs.pull-request-number"
@@ -57,8 +53,6 @@ jobs:
         continue-on-error: true
       - name: "Add Backport Label for new Branch"
         uses: "actions/github-script@v8"
-        permissions:
-          issues: "write"
         with:
           script: |
             const { NEW_BRANCH } = process.env;
