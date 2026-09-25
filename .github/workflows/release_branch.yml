@@ -3,13 +3,18 @@ name: "Create Release Branch"
 on:
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: "pulp-cli-gem"
+
 jobs:
   create-release-branch:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "actions/checkout@v6"
+      - name: "Checkout"
+        uses: "actions/checkout@v6"
         with:
-          token: "${{ secrets.RELEASE_TOKEN }}"
+          path: "pulp-cli-gem"
       - name: "Set up Python"
         uses: "actions/setup-python@v6"
         with:
@@ -24,26 +29,36 @@ jobs:
           git config user.name pulpbot
           git config user.email pulp-infra@redhat.com
       - name: "Create Release Branch"
+        permissions:
+          contents: "write"
         run: |
           uv run --with bump-my-version~=0.20.0 .ci/scripts/create_release_branch.sh
       - name: "Create Pull Request"
         uses: "peter-evans/create-pull-request@v8"
         id: "create_pr"
+        permissions:
+          contents: "write"
+          pull-requests: "write"
         with:
-          token: "${{ secrets.RELEASE_TOKEN }}"
           title: "Bump dev-version"
           body: ""
           branch: "bump_version"
           delete-branch: true
+          path: "pulp-cli-gem"
       - name: "Mark PR automerge"
+        permissions:
+          contents: "write"
+          pull-requests: "write"
         run: |
           gh pr merge --rebase --auto "${{ steps.create_pr.outputs.pull-request-number }}"
         if: "steps.create_pr.outputs.pull-request-number"
         env:
-          GH_TOKEN: "${{ secrets.RELEASE_TOKEN }}"
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         continue-on-error: true
       - name: "Add Backport Label for new Branch"
         uses: "actions/github-script@v8"
+        permissions:
+          issues: "write"
         with:
           script: |
             const { NEW_BRANCH } = process.env;

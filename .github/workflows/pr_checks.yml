@@ -12,16 +12,19 @@ concurrency:
   group: "${{ github.event.pull_request.number }}-${{ github.workflow }}"
   cancel-in-progress: true
 
+defaults:
+  run:
+    working-directory: "pulp-cli-gem"
+
 jobs:
   apply_labels:
     runs-on: "ubuntu-latest"
     name: "Label PR"
-    permissions:
-      pull-requests: "write"
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v6"
         with:
+          path: "pulp-cli-gem"
           fetch-depth: 0
       - name: "Set up Python"
         uses: "actions/setup-python@v6"
@@ -38,6 +41,8 @@ jobs:
           uv run -q .ci/scripts/pr_labels.py "origin/${{ github.base_ref }}" "${{ github.event.pull_request.head.sha }}" >> "$GITHUB_ENV"
       - name: "Apply PR Labels"
         uses: "actions/github-script@v8"
+        permissions:
+          pull-requests: "write"
         with:
           script: |
             const { ADD_LABELS, REMOVE_LABELS } = process.env;

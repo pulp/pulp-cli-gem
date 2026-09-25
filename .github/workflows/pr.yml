@@ -29,6 +29,7 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@v6"
         with:
+          path: "pulp-cli-gem"
           fetch-depth: 0
       - name: "Set up Python"
         uses: "actions/setup-python@v6"
@@ -53,6 +54,7 @@ jobs:
             fi
           done
         shell: "bash"
+        working-directory: "pulp-cli-gem"
   ready-to-ship:
     # This is a dummy dependent task to have a single entry for the branch protection rules.
     runs-on: "ubuntu-latest"
