@@ -12,21 +12,18 @@ concurrency:
   group: "${{ github.event.pull_request.number }}-${{ github.workflow }}"
   cancel-in-progress: true
 
-defaults:
-  run:
-    working-directory: "pulp-cli-gem"
-
 jobs:
   apply_labels:
     permissions:
       pull-requests: "write"
     runs-on: "ubuntu-latest"
     name: "Label PR"
+    permissions:
+      pull-requests: "write"
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v6"
         with:
-          path: "pulp-cli-gem"
           fetch-depth: 0
       - name: "Set up Python"
         uses: "actions/setup-python@v6"

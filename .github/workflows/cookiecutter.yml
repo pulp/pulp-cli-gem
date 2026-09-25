@@ -20,9 +20,9 @@ jobs:
         with:
           repository: "pulp/pulp-cli"
           path: "pulp-cli"
-      - name: "Checkout"
-        uses: "actions/checkout@v6"
+      - uses: "actions/checkout@v6"
         with:
+          token: "${{ secrets.RELEASE_TOKEN }}"
           path: "pulp-cli-gem"
       - name: "Set up Python"
         uses: "actions/setup-python@v6"
@@ -49,6 +49,7 @@ jobs:
         uses: "peter-evans/create-pull-request@v8"
         id: "create_pr"
         with:
+          token: "${{ secrets.RELEASE_TOKEN }}"
           title: "Update cookiecutter"
           body: ""
           branch: "update_cookiecutter"
@@ -59,7 +60,7 @@ jobs:
           gh pr merge --rebase --auto "${{ steps.create_pr.outputs.pull-request-number }}"
         if: "steps.create_pr.outputs.pull-request-number"
         env:
-          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GH_TOKEN: "${{ secrets.RELEASE_TOKEN }}"
         continue-on-error: true
   update-dependencies:
     permissions:
@@ -73,6 +74,7 @@ jobs:
           path: "pulp-cli"
       - uses: "actions/checkout@v6"
         with:
+          token: "${{ secrets.RELEASE_TOKEN }}"
           path: "pulp-cli-gem"
       - name: "Set up Python"
         uses: "actions/setup-python@v6"
@@ -99,6 +101,7 @@ jobs:
         uses: "peter-evans/create-pull-request@v8"
         id: "create_pr"
         with:
+          token: "${{ secrets.RELEASE_TOKEN }}"
           title: "Update CLI and GLUE"
           body: ""
           branch: "update_cli"
@@ -109,6 +112,6 @@ jobs:
           gh pr merge --rebase --auto "${{ steps.create_pr.outputs.pull-request-number }}"
         if: "steps.create_pr.outputs.pull-request-number"
         env:
-          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GH_TOKEN: "${{ secrets.RELEASE_TOKEN }}"
         continue-on-error: true
 ...

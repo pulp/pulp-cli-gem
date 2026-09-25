@@ -3,10 +3,6 @@ name: "Create Release Branch"
 on:
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: "pulp-cli-gem"
-
 jobs:
   create-release-branch:
     permissions:
@@ -15,10 +11,9 @@ jobs:
       pull-requests: "write"
     runs-on: "ubuntu-latest"
     steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v6"
+      - uses: "actions/checkout@v6"
         with:
-          path: "pulp-cli-gem"
+          token: "${{ secrets.RELEASE_TOKEN }}"
       - name: "Set up Python"
         uses: "actions/setup-python@v6"
         with:
@@ -39,17 +34,17 @@ jobs:
         uses: "peter-evans/create-pull-request@v8"
         id: "create_pr"
         with:
+          token: "${{ secrets.RELEASE_TOKEN }}"
           title: "Bump dev-version"
           body: ""
           branch: "bump_version"
           delete-branch: true
-          path: "pulp-cli-gem"
       - name: "Mark PR automerge"
         run: |
           gh pr merge --rebase --auto "${{ steps.create_pr.outputs.pull-request-number }}"
         if: "steps.create_pr.outputs.pull-request-number"
         env:
-          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GH_TOKEN: "${{ secrets.RELEASE_TOKEN }}"
         continue-on-error: true
       - name: "Add Backport Label for new Branch"
         uses: "actions/github-script@v8"
