@@ -10,6 +10,9 @@ defaults:
 
 jobs:
   collect-changes:
+    permissions:
+      contents: "write"
+      pull-requests: "write"
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout"
@@ -36,9 +39,6 @@ jobs:
       - name: "Create Pull Request"
         uses: "peter-evans/create-pull-request@v8"
         id: "create_pr"
-        permissions:
-          contents: "write"
-          pull-requests: "write"
         with:
           title: "Update Changelog"
           body: ""
@@ -46,9 +46,6 @@ jobs:
           delete-branch: true
           path: "pulp-cli-gem"
       - name: "Mark PR automerge"
-        permissions:
-          contents: "write"
-          pull-requests: "write"
         run: |
           gh pr merge --rebase --auto "${{ steps.create_pr.outputs.pull-request-number }}"
         if: "steps.create_pr.outputs.pull-request-number"
