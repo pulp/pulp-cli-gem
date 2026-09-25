@@ -4,14 +4,19 @@ name: "pulp-cli Release"
 on:
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: "pulp-cli-gem"
+
 jobs:
   release:
     name: "Release"
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "actions/checkout@v6"
+      - name: "Checkout"
+        uses: "actions/checkout@v6"
         with:
-          token: "${{ secrets.RELEASE_TOKEN }}"
+          path: "pulp-cli-gem"
       - name: "Set up Python"
         uses: "actions/setup-python@v6"
         with:
@@ -26,6 +31,8 @@ jobs:
           git config user.name pulpbot
           git config user.email pulp-infra@redhat.com
       - name: "Release"
+        permissions:
+          contents: "write"
         run: |
           uv run --with bump-my-version~=0.20.0 --with towncrier~=23.11.0 .ci/scripts/release.sh
 ...
