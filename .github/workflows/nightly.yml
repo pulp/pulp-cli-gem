@@ -20,6 +20,8 @@ jobs:
       security-events: "write"
     uses: "./.github/workflows/codeql.yml"
   collect_changes:
+    permissions:
+      contents: "write"
+      pull-requests: "write"
     uses: "./.github/workflows/collect_changes.yml"
-    secrets: "inherit"
 ...

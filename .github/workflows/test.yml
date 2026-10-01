@@ -70,5 +70,5 @@ jobs:
             RESOLUTION=()
           fi
 
-          uv run "${RESOLUTION[@]}" --isolated --with ../dist/pulp_glue*.whl --with ../dist/pulp_cli*.whl --only-group test .ci/run_container.sh make _test
+          uv run "${RESOLUTION[@]}" --isolated --with dist/pulp_glue*.whl --with dist/pulp_cli*.whl --only-group test .ci/run_container.sh make _test
 ...

@@ -28,13 +28,13 @@ jobs:
       - name: "Build wheels"
         run: |
           make build
-          touch .root
+          touch ../.root
       - name: "Upload wheels"
         uses: "actions/upload-artifact@v6"
         with:
           name: "pulp_cli_packages"
           path: |
-            pulp-cli-gem/.root
+            .root
             pulp-cli-gem/dist/
           if-no-files-found: "error"
           retention-days: 5
