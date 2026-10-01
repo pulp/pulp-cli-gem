@@ -6,10 +6,6 @@ on:
     tags:
       - "[0-9]+.[0-9]+.[0-9]+"
 
-defaults:
-  run:
-    working-directory: "pulp-cli-gem"
-
 jobs:
   build:
     uses: "./.github/workflows/build.yml"
